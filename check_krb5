@@ -28,7 +28,7 @@ sub print_help () {
     print "\n";
     print "-H, --hostname=HOST\n";
     print "\tName or IP address of host to check\n";
-    print "-d, --realm=NAME\n";
+    print "-r, --realm=NAME\n";
     print "\tKerberos realm to authenticate to\n";
     print "-p, --principal=NAME\n";
     print "\tName of principal to try authentication as\n";
@@ -41,7 +41,7 @@ sub print_help () {
 }
 
 sub print_usage () {
-    print "Usage: $PROGNAME -H <host> -d <realm> -p <principal> -k <keytab_file> [-p <port>]\n";
+    print "Usage: $PROGNAME -H <host> -r <realm> -p <principal> -k <keytab_file> [-p <port>]\n";
 }
 
 sub dieunknown ($) {
