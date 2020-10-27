@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Authen::Krb5;
 use Getopt::Long;
-use File::MkTemp;
+use File::Temp qw/ tempfile /;
 use lib '/usr/local/libexec';
 use utils qw/ $TIMEOUT %ERRORS &print_revision &support &usage /;
 use vars qw/
@@ -92,12 +92,11 @@ my $port = $1 if ($opt_P =~ /^([0-9]+)$/);
 ($port) || usage("Invalid port: $opt_P\n");
 
 
-my ($fh, $template) = mkstempt('krb5.conf.XXXXXX', '/tmp');
+my ($fh, $template) = &tempfile('krb5.conf.XXXXXX', DIR => '/tmp', UNLINK => 1);
 if (!defined($fh)) {
     print "KRB5 UNKNOWN: Unknown error - unable to create temp config file\n";
     exit $ERRORS{UNKNOWN};
 }
-$template = "/tmp/$template";
 
 print $fh "[libdefaults]\n";
 print $fh "default_realm = $realm\n";
